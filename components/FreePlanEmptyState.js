@@ -1,11 +1,6 @@
 import React from "react";
+import DashboardShell from "./DashboardShell";
 import {
-  Flex,
-  Link,
-  Stack,
-  Icon,
-  Avatar,
-  Breadcrumb,
   Box,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -16,7 +11,7 @@ import {
 import { CopyIcon } from "@chakra-ui/icons";
 
 const FreePlanEmptyState = () => (
-  <DashBoardShell>
+  <DashboardShell>
     <Box width="100%" backgroundColor="white" borderRadius={4} p={8}>
       <Heading>Get feedback on your site instantly.</Heading>
       <Text>Get started today.</Text>
@@ -24,7 +19,7 @@ const FreePlanEmptyState = () => (
         Upgrade to starter
       </Button>
     </Box>
-  </DashBoardShell>
+  </DashboardShell>
 );
 
 export default FreePlanEmptyState;

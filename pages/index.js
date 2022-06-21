@@ -14,6 +14,8 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
+import EmptyState from "@/components/EmptyState";
+
 export default function Home() {
   const auth = useAuth();
 
@@ -36,13 +38,13 @@ export default function Home() {
             fill="black"
           />
         </Icon>
-        {!auth.user ? (
-          <Button mt={4} size="sm" onClick={(e) => auth.signinWithGithub()}>
-            Sign In
-          </Button>
-        ) : (
+        {auth.user ? (
           <Button mt={4} size="sm" onClick={(e) => auth.signOut()}>
             Sign Out
+          </Button>
+        ) : (
+          <Button mt={4} size="sm" onClick={(e) => auth.signinWithGithub()}>
+            Sign In
           </Button>
         )}
       </Flex>
