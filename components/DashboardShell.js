@@ -54,7 +54,18 @@ const DashboardShell = ({ children }) => {
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </Breadcrumb>
-            <Heading mb={5}>Sites</Heading>
+            <Flex justifyContent="space-between" flexDirection="row">
+              <Heading mb={5}>Sites</Heading>
+              <Button
+                colorScheme="blue"
+                fontWeight="bold"
+                maxW="200px"
+                variant="solid"
+                size="md"
+              >
+                + Add Site
+              </Button>
+            </Flex>
             {children}
           </Flex>
         </Flex>
