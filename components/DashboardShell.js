@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth } from "@/lib/auth";
+import AddSiteModal from "./AddSiteModal";
 import {
   Flex,
   Link,
@@ -38,10 +39,14 @@ const DashboardShell = ({ children }) => {
           <Link>Feedback</Link>
           <Link>Sites</Link>
         </Stack>
-        <Stack spacing={4} isInline alignItems="center" justifyContent="center">
-          <Link>Account</Link>
-          <Avatar size="md" src={auth.user.photoUrl} />
-        </Stack>
+        <Flex alignItems="center" justifyContent="center">
+          {auth.user && (
+            <Button mr={2} variant="ghost" onClick={(e) => auth.signOut()}>
+              Log Out
+            </Button>
+          )}
+          <Avatar size="md" src={auth.user?.photoUrl} />
+        </Flex>
       </Flex>
       <Flex backgroundColor="gray.100" height="100vh">
         <Flex backgroundColor="gray.100" ml="auto" mr="auto">
@@ -56,15 +61,7 @@ const DashboardShell = ({ children }) => {
             </Breadcrumb>
             <Flex justifyContent="space-between" flexDirection="row">
               <Heading mb={5}>Sites</Heading>
-              <Button
-                colorScheme="blue"
-                fontWeight="bold"
-                maxW="200px"
-                variant="solid"
-                size="md"
-              >
-                + Add Site
-              </Button>
+              <AddSiteModal>+ Add site</AddSiteModal>
             </Flex>
             {children}
           </Flex>
