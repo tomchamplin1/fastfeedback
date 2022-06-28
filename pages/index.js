@@ -30,6 +30,15 @@ export default function Home() {
         h="100vh"
       >
         <Head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+          if (document.cookie && document.cookie.includes('fast-feedback-auth')) {
+            window.location.href = "/dashboard"
+          }
+        `,
+            }}
+          />
           <title>Fast Feedback</title>
         </Head>
         <Icon viewBox="0 0 200 200" w={14} h={14}>

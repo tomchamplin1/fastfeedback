@@ -29,6 +29,7 @@ const AddSiteModal = ({ children }) => {
   const { register, handleSubmit } = useForm();
 
   const onCreateSite = ({ name, url }) => {
+    // Create the new object to save in Firestore
     const newSite = {
       authorId: auth.user.uid,
       createdAt: new Date().toISOString(),
@@ -36,7 +37,9 @@ const AddSiteModal = ({ children }) => {
       url,
     };
 
-    createSite(newSite);
+    // Retrieve the document ID for Firestore
+    const { id } = createSite(newSite);
+    // Show a toast message
     toast({
       title: "Success!",
       description: "We've added your site.",
@@ -44,12 +47,12 @@ const AddSiteModal = ({ children }) => {
       duration: 5000,
       isClosable: true,
     });
+    // Update the SWR cache to add the new site
     mutate(
-      "/api/sites",
-      async (data) => {
-        console.log(data);
-        return { sites: [...data.sites, newSite] };
-      },
+      ["/api/sites", auth.user.token],
+      async (data) => ({
+        sites: [{ id, ...newSite }, ...data.sites],
+      }),
       false
     );
     onClose();
