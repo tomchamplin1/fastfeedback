@@ -20,8 +20,8 @@ const EmptyState = () => (
     align="center"
     direction="column"
   >
-    <Heading mb={2}>You haven't added any sites yet.</Heading>
-    <Text mb={8}>Welcome! Let's get started.</Text>
+    <Heading mb={2}>You haven&apos;t added any sites yet.</Heading>
+    <Text mb={8}>Welcome! Let&apos;s get started.</Text>
     <AddSiteModal>Add your first site</AddSiteModal>
   </Flex>
 );

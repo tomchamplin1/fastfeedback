@@ -1,7 +1,7 @@
 import { getAllFeedback } from "@/lib/db-admin";
 import { db } from "@/lib/firebase-admin";
 
-export default async (req, res) => {
+const func = async (req, res) => {
   const siteId = req.query.siteId;
   const { feedback, error } = await getAllFeedback(siteId);
 
@@ -11,3 +11,5 @@ export default async (req, res) => {
 
   res.status(200).json({ feedback });
 };
+
+export default func;
