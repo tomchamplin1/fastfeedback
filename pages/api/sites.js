@@ -1,7 +1,7 @@
 import { auth } from "@/lib/firebase-admin";
 import { getUserSites } from "@/lib/db-admin";
 
-export default async (req, res) => {
+const func = async (req, res) => {
   try {
     const { uid } = await auth.verifyIdToken(req.headers.token);
     const sites = await getUserSites(uid);
@@ -11,3 +11,5 @@ export default async (req, res) => {
     res.status(500).json({ error });
   }
 };
+
+export default func;
