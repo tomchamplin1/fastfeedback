@@ -6,7 +6,7 @@ import NextLink from "next/link";
 
 const SiteTable = ({ sites }) => {
   return (
-    <Table>
+    <Table w="100%">
       <thead>
         <Tr>
           <Th>Name</Th>
@@ -23,7 +23,9 @@ const SiteTable = ({ sites }) => {
             <Td>{site.url} </Td>
             <Td>
               <NextLink href="/p/[siteId]" as={`/p/${site.id}`} passHref>
-                <Link>View Feedback</Link>
+                <Link fontWeight="medium" color="blue.500">
+                  View Feedback
+                </Link>
               </NextLink>
             </Td>
             <Td>{format(parseISO(site.createdAt), "PPpp")}</Td>
