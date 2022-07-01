@@ -9,8 +9,6 @@ const func = async (req, res) => {
 
     res.status(200).json(sites);
   } catch (error) {
-    const headers = propObjectKeys(req.headers);
-
     logger.error(
       {
         request: {
@@ -24,6 +22,7 @@ const func = async (req, res) => {
       },
       error.message
     );
+
     res.status(500).json({ error });
   }
 };
