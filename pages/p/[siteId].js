@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
@@ -66,7 +66,12 @@ const SiteFeedback = ({ initialFeedback }) => {
         <FormControl my={8}>
           <FormLabel htmlFor="Comment">Comment</FormLabel>
           <Input ref={inputEl} type="Comment" id="Comment"></Input>
-          <Button type="submit" fontWeight="medium" mt={2}>
+          <Button
+            type="submit"
+            fontWeight="medium"
+            mt={2}
+            isDisabled={router.isFallback}
+          >
             Add Comment
           </Button>
         </FormControl>
