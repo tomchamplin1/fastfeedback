@@ -15,8 +15,8 @@ const DashboardShell = ({ children }) => {
         <Flex
           alignItems="center"
           justifyContent="space-between"
-          pt={4}
-          pb={4}
+          pt={2}
+          pb={2}
           maxW="1250px"
           margin="0 auto"
           w="full"
