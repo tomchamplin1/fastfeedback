@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
@@ -35,10 +35,13 @@ const SiteFeedback = ({ initialFeedback }) => {
   const auth = useAuth();
   const router = useRouter();
   const inputEl = useRef(null);
-  const [allFeedback, setAllFeedback] = useState(initialFeedback);
+  const [allFeedback, setAllFeedback] = useState([]);
+
+  useEffect(() => {
+    setAllFeedback(initialFeedback);
+  }, [initialFeedback]);
 
   const onSubmit = (e) => {
-    console.log(allFeedback);
     e.preventDefault();
 
     const newFeedback = {
@@ -50,6 +53,8 @@ const SiteFeedback = ({ initialFeedback }) => {
       provider: auth.user.provider,
       status: "pending",
     };
+
+    inputEl.current.value = "";
     setAllFeedback([newFeedback, ...allFeedback]);
     createFeedback(newFeedback);
   };
@@ -62,18 +67,25 @@ const SiteFeedback = ({ initialFeedback }) => {
       maxWidth="700px"
       margin="0 auto"
     >
-      <Box as="form" onSubmit={onSubmit}>
-        <FormControl my={8}>
-          <FormLabel htmlFor="Comment">Comment</FormLabel>
-          <Input ref={inputEl} type="Comment" id="Comment"></Input>
-          <Button type="submit" fontWeight="medium" mt={2}>
-            Add Comment
-          </Button>
-        </FormControl>
-      </Box>
-      {allFeedback.map((feedback) => (
-        <Feedback key={feedback.id} {...feedback} />
-      ))}
+      {auth.user && (
+        <Box as="form" onSubmit={onSubmit}>
+          <FormControl my={8}>
+            <FormLabel htmlFor="comment">Comment</FormLabel>
+            <Input ref={inputEl} type="comment" id="Comment"></Input>
+            <Button type="submit" fontWeight="medium" mt={2}>
+              Add Comment
+            </Button>
+          </FormControl>
+        </Box>
+      )}
+
+      {allFeedback &&
+        allFeedback.map((feedback) => (
+          <Feedback
+            key={feedback.id || new Date().getTime().toString()}
+            {...feedback}
+          />
+        ))}
     </Box>
   );
 };

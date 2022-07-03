@@ -37,6 +37,7 @@ const SiteTableSkeleton = () => {
         <SkeletonRow width="50px" />
         <SkeletonRow width="100px" />
         <SkeletonRow width="75px" />
+        <SkeletonRow width="100px" />
       </tbody>
     </Table>
   );
