@@ -6,7 +6,7 @@ import NextLink from "next/link";
 
 const SiteTable = ({ sites }) => {
   return (
-    <Table w="100%">
+    <Table w="100%" pb={20}>
       <thead>
         <Tr>
           <Th>Name</Th>

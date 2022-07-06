@@ -1,11 +1,32 @@
-import React from "react";
+import { React, useState } from "react";
 import NextLink from "next/link";
 import AddSiteModal from "./AddSiteModal";
-import { Flex, Link, Stack, Icon, Avatar, Box, Button } from "@chakra-ui/react";
-import { CopyIcon } from "@chakra-ui/icons";
+import {
+  Flex,
+  Link,
+  Stack,
+  Icon,
+  Avatar,
+  Box,
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  IconButton,
+  MenuDivider,
+} from "@chakra-ui/react";
+import {
+  ChevronDownIcon,
+  ExternalLinkIcon,
+  InfoOutlineIcon,
+  SettingsIcon,
+} from "@chakra-ui/icons";
 import { useAuth } from "@/lib/auth";
+import { createCheckoutSession, goToBillingPortal } from "@/lib/db";
 
 const DashboardShell = ({ children }) => {
+  const [isBillingLoading, setBillingLoading] = useState(false);
   const { user, signOut } = useAuth();
 
   return (
@@ -39,12 +60,29 @@ const DashboardShell = ({ children }) => {
             </NextLink>
           </Stack>
           <Flex justifyContent="center" alignItems="center">
-            {user && (
-              <Button variant="ghost" mr={2} onClick={() => signOut()}>
-                Log Out
-              </Button>
-            )}
-            <Avatar size="sm" src={user?.photoUrl} />
+            <Menu>
+              <MenuButton _hover={{ boxShadow: "lg" }} borderRadius="15px">
+                <Avatar size="sm" src={user?.photoUrl} />
+              </MenuButton>
+              <MenuList>
+                <MenuItem>
+                  <NextLink href="/account" passHref>
+                    <Link style={{ textDecoration: "none" }}>Account</Link>
+                  </NextLink>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    setBillingLoading(true);
+                    goToBillingPortal();
+                  }}
+                  isLoading={isBillingLoading}
+                >
+                  Manage Billing
+                </MenuItem>
+                <MenuDivider />
+                <MenuItem onClick={() => signOut()}>Sign Out</MenuItem>
+              </MenuList>
+            </Menu>
           </Flex>
         </Flex>
       </Flex>
