@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Flex,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Heading,
-  Text,
-  Button,
-} from "@chakra-ui/react";
-import { CopyIcon } from "@chakra-ui/icons";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import AddSiteModal from "./AddSiteModal";
 
 const EmptyState = () => (
