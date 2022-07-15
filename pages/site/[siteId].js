@@ -6,10 +6,16 @@ import { useRouter } from "next/router";
 import { useRef, useState, useEffect } from "react";
 
 import { Button, Input, Box, FormControl, FormLabel } from "@chakra-ui/react";
+import DashboardShell from "@/components/DashboardShell";
+import SiteTableHeader from "@/components/SiteTableHeader";
+import EmptyState from "@/components/EmptyState";
+import UpgradeEmptyState from "@/components/UpgradeEmptyState";
 
 export async function getStaticProps(context) {
   const siteId = context.params.siteId;
   const { feedback } = await getAllFeedback(siteId);
+
+  console.log(siteId);
 
   return {
     props: {
@@ -31,7 +37,7 @@ export async function getStaticPaths() {
   };
 }
 
-const SiteFeedback = ({ initialFeedback }) => {
+const FeedbackPage = ({ initialFeedback }) => {
   const auth = useAuth();
   const router = useRouter();
   const inputEl = useRef(null);
@@ -60,34 +66,36 @@ const SiteFeedback = ({ initialFeedback }) => {
   };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      width="full"
-      maxWidth="700px"
-      margin="0 auto"
-    >
-      {auth.user && (
-        <Box as="form" onSubmit={onSubmit}>
-          <FormControl my={8}>
-            <FormLabel htmlFor="comment">Comment</FormLabel>
-            <Input ref={inputEl} type="comment" id="Comment"></Input>
-            <Button type="submit" fontWeight="medium" mt={2}>
-              Add Comment
-            </Button>
-          </FormControl>
-        </Box>
-      )}
+    <DashboardShell>
+      <Box
+        display="flex"
+        flexDirection="column"
+        width="full"
+        maxWidth="700px"
+        margin="0 auto"
+      >
+        {auth.user && (
+          <Box as="form" onSubmit={onSubmit}>
+            <FormControl my={8}>
+              <FormLabel htmlFor="comment">Comment</FormLabel>
+              <Input ref={inputEl} type="comment" id="Comment"></Input>
+              <Button type="submit" fontWeight="medium" mt={2}>
+                Add Comment
+              </Button>
+            </FormControl>
+          </Box>
+        )}
 
-      {allFeedback &&
-        allFeedback.map((feedback) => (
-          <Feedback
-            key={feedback.id || new Date().getTime().toString()}
-            {...feedback}
-          />
-        ))}
-    </Box>
+        {allFeedback &&
+          allFeedback.map((feedback) => (
+            <Feedback
+              key={feedback.id || new Date().getTime().toString()}
+              {...feedback}
+            />
+          ))}
+      </Box>
+    </DashboardShell>
   );
 };
 
-export default SiteFeedback;
+export default FeedbackPage;

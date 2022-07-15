@@ -8,6 +8,7 @@ import SiteTableSkeleton from "@/components/SiteTableSkeleton";
 import SiteTable from "@/components/SiteTable";
 import SiteTableHeader from "@/components/SiteTableHeader";
 import UpgradeEmptyState from "@/components/UpgradeEmptyState";
+import Page from "@/components/Page";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -26,7 +27,7 @@ const Dashboard = () => {
   if (data.sites.length) {
     return (
       <DashboardShell>
-        <SiteTableHeader />
+        <SiteTableHeader isPaidAccount={isPaidAccount} />
         <SiteTable sites={data.sites} />
       </DashboardShell>
     );
@@ -40,4 +41,10 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+const DashboardPage = () => (
+  <Page name="Sites" path="/sites">
+    <Dashboard />
+  </Page>
+);
+
+export default DashboardPage;

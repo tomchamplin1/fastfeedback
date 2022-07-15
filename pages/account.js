@@ -18,6 +18,7 @@ import {
 import DashboardShell from "@/components/DashboardShell";
 import { createCheckoutSession, goToBillingPortal } from "@/lib/db";
 import { useState } from "react";
+import Page from "@/components/Page";
 
 const FeedbackUsage = () => (
   <StatGroup>
@@ -130,4 +131,10 @@ const Account = () => {
   );
 };
 
-export default Account;
+const AccountPage = () => (
+  <Page name="Account" path="/account">
+    <Account />
+  </Page>
+);
+
+export default AccountPage;
