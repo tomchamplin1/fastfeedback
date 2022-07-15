@@ -14,7 +14,7 @@ const SiteTableHeader = ({ isPaidAccount }) => (
     <Breadcrumb>
       <BreadcrumbItem>
         <BreadcrumbLink fontSize="sm" color="gray.600">
-          Sites /
+          Sites
         </BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>

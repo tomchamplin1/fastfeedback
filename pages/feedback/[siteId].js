@@ -1,22 +1,28 @@
 import useSWR from "swr";
+import { useRouter } from "next/router";
+
 import { useAuth } from "@/lib/auth";
 import fetcher from "@/utils/fetcher";
 
-import EmptyState from "@/components/EmptyState";
+import FeedbackEmptyState from "@/components/FeedbackEmptyState";
 import DashboardShell from "@/components/DashboardShell";
 import SiteTableSkeleton from "@/components/SiteTableSkeleton";
 import FeedbackTable from "@/components/FeedbackTable";
-import FeedbackTableHeader from "@/components/FeedbackTableHeader";
+import SiteFeedbackTableHeader from "@/components/SiteFeedbackTableHeader";
 import Page from "@/components/Page";
 
-const MyFeedback = () => {
+const SiteFeedback = () => {
   const { user } = useAuth();
-  const { data } = useSWR(user ? ["/api/feedback", user.token] : null, fetcher);
+  const { query } = useRouter();
+  const { data } = useSWR(
+    user ? [`/api/feedback/${query.siteId}`, user.token] : null,
+    fetcher
+  );
 
   if (!data) {
     return (
       <DashboardShell>
-        <FeedbackTableHeader />
+        <SiteFeedbackTableHeader />
         <SiteTableSkeleton />
       </DashboardShell>
     );
@@ -24,20 +30,20 @@ const MyFeedback = () => {
 
   return (
     <DashboardShell>
-      <FeedbackTableHeader />
-      {data?.feedback?.length ? (
+      <SiteFeedbackTableHeader siteName={data.site.name} />
+      {data.feedback.length ? (
         <FeedbackTable allFeedback={data.feedback} />
       ) : (
-        <EmptyState />
+        <FeedbackEmptyState />
       )}
     </DashboardShell>
   );
 };
 
-const MyFeedbackPage = () => (
+const SiteFeedbackPage = () => (
   <Page name="Feedback" path="/feedback">
-    <MyFeedback />
+    <SiteFeedback />
   </Page>
 );
 
-export default MyFeedbackPage;
+export default SiteFeedbackPage;

@@ -1,15 +1,12 @@
-import { getAllFeedback, getSite } from "@/lib/db-admin";
-import { formatObjectKeys, logger } from "@/utils/logger";
+import { getSite } from "@/lib/db-admin";
+import { logger, formatObjectKeys } from "@/utils/logger";
 
-const func = async (req, res) => {
+export default async (req, res) => {
   try {
-    const siteId = req.query.siteId;
-    const { feedback } = await getAllFeedback(siteId);
+    const { siteId } = req.query;
     const { site } = await getSite(siteId);
 
-    console.log(site);
-
-    res.status(200).json({ feedback, site });
+    res.status(200).json({ site });
   } catch (error) {
     logger.error(
       {
@@ -28,5 +25,3 @@ const func = async (req, res) => {
     res.status(500).json({ error });
   }
 };
-
-export default func;
