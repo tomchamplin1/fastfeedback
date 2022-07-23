@@ -1,21 +1,7 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "@/styles/Home.module.css";
-import { auth } from "firebase";
+
 import { useAuth } from "@/lib/auth";
-import logo from "../src/logo.svg";
-import {
-  Button,
-  ButtonGroup,
-  Heading,
-  Text,
-  Code,
-  Icon,
-  Flex,
-  Box,
-  Stack,
-} from "@chakra-ui/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Icon, Flex, Box, Stack } from "@chakra-ui/react";
 
 import EmptyState from "@/components/EmptyState";
 
