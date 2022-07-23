@@ -1,7 +1,7 @@
 import { getSite } from "@/lib/db-admin";
 import { logger, formatObjectKeys } from "@/utils/logger";
 
-export default async (req, res) => {
+export async (req, res) => {
   try {
     const { siteId } = req.query;
     const { site } = await getSite(siteId);
