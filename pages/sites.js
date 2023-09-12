@@ -13,7 +13,7 @@ import Page from "@/components/Page";
 const Dashboard = () => {
   const { user } = useAuth();
   const { data } = useSWR(user ? ["/api/sites", user.token] : null, fetcher);
-  const isPaidAccount = user?.stripeRole;
+  const isPaidAccount = user?.stripeRole !== "free";
 
   if (!data) {
     return (
