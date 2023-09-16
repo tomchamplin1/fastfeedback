@@ -6,6 +6,7 @@ import { Td } from "./Table";
 import RemoveButton from "./RemoveButton";
 import { updateFeedback } from "@/lib/db";
 import { useAuth } from "@/lib/auth";
+import { TableCell, TableRow } from "@tremor/react";
 
 const FeedbackRow = ({ id, author, text, route, status }) => {
   const auth = useAuth();
@@ -17,19 +18,19 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
   };
 
   return (
-    <Box as="tr" key={id}>
-      <Td fontWeight="medium">{author} </Td>
-      <Td>{text}</Td>
-      <Td>
+    <TableRow as="tr" key={id}>
+      <TableCell fontWeight="medium">{author} </TableCell>
+      <TableCell>{text}</TableCell>
+      <TableCell>
         <Code>{route || "/"}</Code>
-      </Td>
-      <Td>
+      </TableCell>
+      <TableCell>
         <Switch onChange={toggleFeedback} isChecked={isChecked} />
-      </Td>
-      <Td>
+      </TableCell>
+      <TableCell>
         <RemoveButton feedbackId={id} />
-      </Td>
-    </Box>
+      </TableCell>
+    </TableRow>
   );
 };
 

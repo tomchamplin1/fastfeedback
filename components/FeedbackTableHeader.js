@@ -12,23 +12,14 @@ import {
 
 const FeedbackTableHeader = ({ siteName }) => (
   <>
-    <Breadcrumb>
-      <BreadcrumbItem>
-        <NextLink href="/feedback" passHref>
-          <Link fontWeight="medium" color="blue.500">
-            Feedback
-          </Link>
-        </NextLink>
-      </BreadcrumbItem>
-      <BreadcrumbItem>
-        <BreadcrumbLink fontSize="sm" color="gray.600">
-          All Feedback
-        </BreadcrumbLink>
-      </BreadcrumbItem>
-    </Breadcrumb>
-    <Flex justifyContent="space-between" flexDirection="row">
-      <Heading mb={5}>All Feedback</Heading>
-    </Flex>
+    <div>
+      <div>
+        <h1 className="text-2xl">Feedback</h1>
+      </div>
+      <div>
+        <h2 className="text-slate-500 mb-5">All Feedback</h2>
+      </div>
+    </div>
   </>
 );
 

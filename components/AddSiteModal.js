@@ -60,15 +60,12 @@ const AddSiteModal = ({ children }) => {
 
   return (
     <>
-      <Button
-        fontWeight="bold"
-        maxW="200px"
-        colorScheme="blue"
-        size="md"
+      <button
+        className="text-md py-1 px-3 rounded-lg bg-white text-black font-semibold border"
         onClick={onOpen}
       >
         {children}
-      </Button>
+      </button>
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent as="form" onSubmit={handleSubmit(onCreateSite)}>

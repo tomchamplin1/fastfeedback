@@ -19,6 +19,8 @@ import DashboardShell from "@/components/DashboardShell";
 import { createCheckoutSession, goToBillingPortal } from "@/lib/db";
 import { useState } from "react";
 import Page from "@/components/Page";
+import Image from "next/image";
+import { Card } from "@tremor/react";
 
 const FeedbackUsage = () => (
   <StatGroup>
@@ -79,23 +81,26 @@ const Account = () => {
 
   return (
     <DashboardShell>
-      <Flex
-        direction="column"
-        maxW="600px"
-        align={["left", "center"]}
-        margin="0 auto"
-      >
-        <Flex direction="column" align={["left", "center"]} ml={4}>
-          <Avatar
-            w={["3rem", "6rem"]}
-            h={["3rem", "6rem"]}
-            mb={4}
-            src={user?.photoUrl}
-          />
-          <Heading letterSpacing="-1px">{user?.name}</Heading>
-          <Text>{user?.email}</Text>
-        </Flex>
-        <SettingsTable stripeRole={user?.stripeRole}>
+      <div className="max-w-2xl mx-auto">
+        <div className="mx-auto text-center">
+          {user?.photoUrl && (
+            <Image
+              width={100}
+              height={100}
+              className="rounded-full"
+              src={user?.photoUrl}
+            />
+          )}
+          <h1 className="mb-2 mt-2 text-3xl">{user?.name}</h1>
+          <h2 className="mb-5">{user?.email}</h2>
+        </div>
+        <Card
+          stripeRole={user?.stripeRole}
+          direction="column"
+          maxW="600px"
+          align={["left", "center"]}
+          margin="0 auto"
+        >
           <FeedbackUsage />
           <Text my={4}>
             Fast Feedback uses Stripe to update, change, or cancel your
@@ -103,30 +108,21 @@ const Account = () => {
             addresses through the secure portal.
           </Text>
           <Flex justify="flex-end">
-            <Button variant="ghost" ml={4} onClick={() => signOut()}>
+            <button variant="ghost" ml={4} onClick={() => signOut()}>
               Log Out
-            </Button>
+            </button>
             <Button
               onClick={() => {
                 setBillingLoading(true);
                 goToBillingPortal();
               }}
-              backgroundColor="gray.900"
-              color="white"
-              fontWeight="medium"
-              ml={4}
-              isLoading={isBillingLoading}
-              _hover={{ bg: "gray.700" }}
-              _active={{
-                bg: "gray.800",
-                transform: "scale(0.95)",
-              }}
+              className="bg-white text-black"
             >
               Manage Billing
             </Button>
           </Flex>
-        </SettingsTable>
-      </Flex>
+        </Card>
+      </div>
     </DashboardShell>
   );
 };

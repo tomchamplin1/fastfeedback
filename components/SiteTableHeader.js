@@ -11,17 +11,13 @@ import AddSiteModal from "./AddSiteModal";
 
 const SiteTableHeader = ({ isPaidAccount }) => (
   <>
-    <Breadcrumb>
-      <BreadcrumbItem>
-        <BreadcrumbLink fontSize="sm" color="gray.600">
-          Sites
-        </BreadcrumbLink>
-      </BreadcrumbItem>
-    </Breadcrumb>
-    <Flex justifyContent="space-between" flexDirection="row">
-      <Heading mb={5}>Sites</Heading>
+    <div>
+      <h1 className="text-2xl">Sites</h1>
+    </div>
+    <div className="flex justify-between mb-5">
+      <h2 className="text-slate-500">All sites with feedback.</h2>
       {isPaidAccount && <AddSiteModal>+ Add site</AddSiteModal>}
-    </Flex>
+    </div>
   </>
 );
 

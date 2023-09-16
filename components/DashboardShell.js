@@ -1,95 +1,71 @@
 import { React, useState } from "react";
 import NextLink from "next/link";
-import AddSiteModal from "./AddSiteModal";
 import {
   Flex,
   Link,
-  Stack,
-  Icon,
-  Avatar,
-  Box,
-  Button,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  IconButton,
   MenuDivider,
 } from "@chakra-ui/react";
-import {
-  ChevronDownIcon,
-  ExternalLinkIcon,
-  InfoOutlineIcon,
-  SettingsIcon,
-} from "@chakra-ui/icons";
 import { useAuth } from "@/lib/auth";
-import { createCheckoutSession, goToBillingPortal } from "@/lib/db";
+import logo from "../src/Flogo.png";
+import { goToBillingPortal } from "@/lib/db";
+import Image from "next/image";
 
 const DashboardShell = ({ children }) => {
   const [isBillingLoading, setBillingLoading] = useState(false);
   const { user, signOut } = useAuth();
 
   return (
-    <Box backgroundColor="gray.100" minH="100vh" backgroundSize="cover" pb={20}>
-      <Box backgroundColor="blue.400" h={2} w="100%" />
-      <Flex backgroundColor="white" mb={16} w="full">
-        <Flex
+    <div backgroundColor="bg-white" minH="100vh" backgroundSize="cover" pb={20}>
+      <div className="bg-blue-800 w-full h-2" />
+      <nav className="bg-white px-5 py-2 border border-b" w="full">
+        <div
           alignItems="center"
           justifyContent="space-between"
-          pt={2}
-          pb={2}
           maxW="1250px"
           margin="0 auto"
           w="full"
           px={8}
+          className="px-8 w-full flex justify-between"
         >
-          <Stack spacing={4} alignItems="center" isInline>
+          <div className="flex my-auto">
             <NextLink href="/" passHref>
-              <Icon viewBox="0 0 200 200" w={14} h={14}>
-                <path
-                  d="M24.2102 155V45.9091H89.6222V57.6278H37.4205V94.4886H84.7216V106.207H37.4205V155H24.2102ZM112.247 155V45.9091H177.659V57.6278H125.458V94.4886H172.759V106.207H125.458V155H112.247Z"
-                  fill="black"
-                />
-              </Icon>
+              <Image
+                width={40}
+                height={40}
+                className=""
+                src={logo}
+                alt="logo"
+              />
             </NextLink>
             <NextLink href="/sites" passHref>
-              <Link>Sites</Link>
+              <Link className="my-auto mr-5 ml-5">Sites</Link>
             </NextLink>
             <NextLink href="/feedback" passHref>
-              <Link>Feedback</Link>
+              <Link className="my-auto">Feedback</Link>
             </NextLink>
-          </Stack>
-          <Flex justifyContent="center" alignItems="center">
-            <Menu>
-              <MenuButton _hover={{ boxShadow: "lg" }} borderRadius="15px">
-                <Avatar size="sm" src={user?.photoUrl} />
-              </MenuButton>
-              <MenuList>
-                <MenuItem>
-                  <NextLink href="/account" passHref>
-                    <Link style={{ textDecoration: "none" }}>Account</Link>
-                  </NextLink>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    setBillingLoading(true);
-                    goToBillingPortal();
-                  }}
-                  isLoading={isBillingLoading}
-                >
-                  Manage Billing
-                </MenuItem>
-                <MenuDivider />
-                <MenuItem onClick={() => signOut()}>Sign Out</MenuItem>
-              </MenuList>
-            </Menu>
-          </Flex>
-        </Flex>
-      </Flex>
-      <Flex margin="0 auto" direction="column" maxW="1250px" px={8}>
-        {children}
-      </Flex>
-    </Box>
+          </div>
+
+          <NextLink href="/account" passHref className="my-auto">
+            <Link className="my-auto pt-1" style={{ textDecoration: "none" }}>
+              {user?.photoUrl && (
+                <Image
+                  width={40}
+                  height={40}
+                  className="rounded-full my-auto"
+                  src={user?.photoUrl}
+                  alt="logo"
+                />
+              )}
+            </Link>
+          </NextLink>
+        </div>
+      </nav>
+      <div className="px-12 py-12">{children}</div>
+    </div>
   );
 };
 

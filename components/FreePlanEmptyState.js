@@ -12,7 +12,7 @@ import { CopyIcon } from "@chakra-ui/icons";
 
 const FreePlanEmptyState = () => (
   <DashboardShell>
-    <Box width="100%" backgroundColor="white" borderRadius={4} p={8}>
+    <Box backgroundColor="white">
       <Heading>Get feedback on your site instantly.</Heading>
       <Text>Get started today.</Text>
       <Button variant="solid" size="md">
